@@ -1,6 +1,7 @@
 package com.example.bizcard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -17,11 +18,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,14 +64,40 @@ fun CreateBizCard(){
             )
         ){
             Column(modifier = Modifier
-                .height(300.dp)
+                .height(320.dp)
                 .fillMaxWidth(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally){
                 CreateImageProfile()
                 HorizontalDivider()
+                CreateInfo()
+                Button(onClick = {
+                    Log.d("Clicked", "CreateBizCard")
+                }) {
+                    Text("Portfolio")
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun CreateInfo() {
+    Column(
+        modifier = Modifier
+            .padding(5.dp)
+    ) {
+        Text(
+            text = "Mustajbasic Adem",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(text = "Full Stack Developer", modifier = Modifier.padding(3.dp))
+        Text(text = "Android Developer", modifier = Modifier.padding(3.dp))
+        Text(
+            text = "@mstbadem", modifier = Modifier.padding(3.dp),
+            style = MaterialTheme.typography.titleSmall
+        )
     }
 }
 
@@ -79,9 +108,8 @@ private fun CreateImageProfile(modifier: Modifier = Modifier) {
             .size(150.dp)
             .padding(5.dp),
         shape = CircleShape,
-        border = BorderStroke(0.5.dp, Color.LightGray),
+        border = BorderStroke(2.dp, Color.LightGray),
         shadowElevation = 4.dp,
-        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
     ) {
         Image(
             painter = painterResource(id = R.drawable.profile_picture),
